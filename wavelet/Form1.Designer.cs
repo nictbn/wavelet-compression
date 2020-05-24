@@ -66,6 +66,7 @@
             this.XTextBox = new System.Windows.Forms.TextBox();
             this.YLabel = new System.Windows.Forms.Label();
             this.XLabel = new System.Windows.Forms.Label();
+            this.VizualizeWavelet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecodedImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LevelNumericUpDown)).BeginInit();
@@ -358,6 +359,7 @@
             this.AnalysisButton.TabIndex = 27;
             this.AnalysisButton.Text = "Analysis";
             this.AnalysisButton.UseVisualStyleBackColor = true;
+            this.AnalysisButton.Click += new System.EventHandler(this.AnalysisButton_Click);
             // 
             // SynthesisButton
             // 
@@ -367,6 +369,7 @@
             this.SynthesisButton.TabIndex = 28;
             this.SynthesisButton.Text = "Synthesis";
             this.SynthesisButton.UseVisualStyleBackColor = true;
+            this.SynthesisButton.Click += new System.EventHandler(this.SynthesisButton_Click);
             // 
             // ScaleLabel
             // 
@@ -401,6 +404,8 @@
             this.ScaleTextBox.Name = "ScaleTextBox";
             this.ScaleTextBox.Size = new System.Drawing.Size(100, 20);
             this.ScaleTextBox.TabIndex = 34;
+            this.ScaleTextBox.Text = "1";
+            this.ScaleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OffsetTextBox
             // 
@@ -408,6 +413,8 @@
             this.OffsetTextBox.Name = "OffsetTextBox";
             this.OffsetTextBox.Size = new System.Drawing.Size(100, 20);
             this.OffsetTextBox.TabIndex = 35;
+            this.OffsetTextBox.Text = "0";
+            this.OffsetTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // YTextBox
             // 
@@ -415,6 +422,8 @@
             this.YTextBox.Name = "YTextBox";
             this.YTextBox.Size = new System.Drawing.Size(100, 20);
             this.YTextBox.TabIndex = 41;
+            this.YTextBox.Text = "0";
+            this.YTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // XTextBox
             // 
@@ -422,6 +431,8 @@
             this.XTextBox.Name = "XTextBox";
             this.XTextBox.Size = new System.Drawing.Size(100, 20);
             this.XTextBox.TabIndex = 40;
+            this.XTextBox.Text = "0";
+            this.XTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // YLabel
             // 
@@ -441,11 +452,22 @@
             this.XLabel.TabIndex = 38;
             this.XLabel.Text = "X";
             // 
+            // VizualizeWavelet
+            // 
+            this.VizualizeWavelet.Location = new System.Drawing.Point(1044, 519);
+            this.VizualizeWavelet.Name = "VizualizeWavelet";
+            this.VizualizeWavelet.Size = new System.Drawing.Size(168, 23);
+            this.VizualizeWavelet.TabIndex = 42;
+            this.VizualizeWavelet.Text = "Vizualize Wavelet";
+            this.VizualizeWavelet.UseVisualStyleBackColor = true;
+            this.VizualizeWavelet.Click += new System.EventHandler(this.VizualizeWavelet_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1330, 588);
+            this.Controls.Add(this.VizualizeWavelet);
             this.Controls.Add(this.YTextBox);
             this.Controls.Add(this.XTextBox);
             this.Controls.Add(this.YLabel);
@@ -534,6 +556,7 @@
         private System.Windows.Forms.TextBox XTextBox;
         private System.Windows.Forms.Label YLabel;
         private System.Windows.Forms.Label XLabel;
+        private System.Windows.Forms.Button VizualizeWavelet;
     }
 }
 

@@ -424,5 +424,114 @@ namespace wavelet
             HorizontalSynthesis(1);
             DrawImage();
         }
+
+        private void AnalysisButton_Click(object sender, EventArgs e)
+        {
+            int numberOfSteps = Convert.ToInt32(LevelNumericUpDown.Value);
+            for (int i = 1; i <= numberOfSteps; i++)
+            {
+                HorizontalAnalysis(i);
+                VerticalAnalysis(i);
+            }
+            DrawImage();
+        }
+
+        private void SynthesisButton_Click(object sender, EventArgs e)
+        {
+            int numberOfSteps = Convert.ToInt32(LevelNumericUpDown.Value);
+            for (int i = numberOfSteps; i >= 1; i--)
+            {
+                VerticalSynthesis(i);
+                HorizontalSynthesis(i);
+            }
+            DrawImage();
+        }
+
+        private void VizualizeWavelet_Click(object sender, EventArgs e)
+        {
+            double scale;
+            double offset;
+            double x;
+            double y;
+            if (!Double.TryParse(ScaleTextBox.Text, out scale))
+            {
+                string message = "The scale value should be numeric!";
+                string title = "Error";
+                MessageBox.Show(message, title);
+                return;
+            }
+            if (!Double.TryParse(OffsetTextBox.Text, out offset))
+            {
+                string message = "The offset value should be numeric!";
+                string title = "Error";
+                MessageBox.Show(message, title);
+                return;
+            }
+            if (!Double.TryParse(XTextBox.Text, out x))
+            {
+                string message = "The X value should be numeric!";
+                string title = "Error";
+                MessageBox.Show(message, title);
+                return;
+            }
+            if (!Double.TryParse(YTextBox.Text, out y))
+            {
+                string message = "The Y value should be numeric!";
+                string title = "Error";
+                MessageBox.Show(message, title);
+                return;
+            }
+
+            if(x < 0 || x > IMAGE_WIDTH)
+            {
+                string message = "Incorrect X value!";
+                string title = "Error";
+                MessageBox.Show(message, title);
+                return;
+            }
+            if (y < 0 || y > IMAGE_WIDTH)
+            {
+                string message = "Incorrect Y value!";
+                string title = "Error";
+                MessageBox.Show(message, title);
+                return;
+            }
+
+            Bitmap image = new Bitmap(IMAGE_WIDTH, IMAGE_HEIGHT);
+            for (int i = 0; i < IMAGE_HEIGHT; i++)
+            {
+                for (int j = 0; j < IMAGE_WIDTH; j++)
+                {
+                    int color = (int)DecodedImageMatrix[i, j];
+                    if (i < y && j < x)
+                    {
+                        if (color < 0)
+                        {
+                            color = 0;
+                        }
+                        if (color > 255)
+                        {
+                            color = 255;
+                        }
+                        image.SetPixel(j, i, Color.FromArgb(color, color, color));
+                    }
+                    else
+                    {
+                        double floatPixel = color * scale + offset;
+                        color = (int)floatPixel;
+                        if (color < 0)
+                        {
+                            color = 0;
+                        }
+                        if (color > 255)
+                        {
+                            color = 255;
+                        }
+                        image.SetPixel(j, i, Color.FromArgb(color, color, color));
+                    }
+                }
+            }
+            DecodedImagePictureBox.Image = image;
+        }
     }
 }
