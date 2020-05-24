@@ -59,13 +59,13 @@
             this.SynthesisButton = new System.Windows.Forms.Button();
             this.ScaleLabel = new System.Windows.Forms.Label();
             this.OffsetLabel = new System.Windows.Forms.Label();
-            this.XLabel = new System.Windows.Forms.Label();
-            this.YLabel = new System.Windows.Forms.Label();
             this.LevelLabel = new System.Windows.Forms.Label();
             this.ScaleTextBox = new System.Windows.Forms.TextBox();
             this.OffsetTextBox = new System.Windows.Forms.TextBox();
-            this.XTextBox = new System.Windows.Forms.TextBox();
             this.YTextBox = new System.Windows.Forms.TextBox();
+            this.XTextBox = new System.Windows.Forms.TextBox();
+            this.YLabel = new System.Windows.Forms.Label();
+            this.XLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecodedImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LevelNumericUpDown)).BeginInit();
@@ -97,6 +97,7 @@
             this.CoderLoadButton.TabIndex = 2;
             this.CoderLoadButton.Text = "Load";
             this.CoderLoadButton.UseVisualStyleBackColor = true;
+            this.CoderLoadButton.Click += new System.EventHandler(this.CoderLoadButton_Click);
             // 
             // DecoderLoadButton
             // 
@@ -133,6 +134,7 @@
             this.AnH1.TabIndex = 6;
             this.AnH1.Text = "An H1";
             this.AnH1.UseVisualStyleBackColor = true;
+            this.AnH1.Click += new System.EventHandler(this.AnH1_Click);
             // 
             // SyH1
             // 
@@ -151,6 +153,7 @@
             this.AnV1.TabIndex = 8;
             this.AnV1.Text = "An V1";
             this.AnV1.UseVisualStyleBackColor = true;
+            this.AnV1.Click += new System.EventHandler(this.AnV1_Click);
             // 
             // SyV1
             // 
@@ -178,6 +181,7 @@
             this.AnV2.TabIndex = 12;
             this.AnV2.Text = "An V2";
             this.AnV2.UseVisualStyleBackColor = true;
+            this.AnV2.Click += new System.EventHandler(this.AnV2_Click);
             // 
             // SyH2
             // 
@@ -196,6 +200,7 @@
             this.AnH2.TabIndex = 10;
             this.AnH2.Text = "An H2";
             this.AnH2.UseVisualStyleBackColor = true;
+            this.AnH2.Click += new System.EventHandler(this.AnH2_Click);
             // 
             // SyV3
             // 
@@ -214,6 +219,7 @@
             this.AnV3.TabIndex = 16;
             this.AnV3.Text = "An V3";
             this.AnV3.UseVisualStyleBackColor = true;
+            this.AnV3.Click += new System.EventHandler(this.AnV3_Click);
             // 
             // SyH3
             // 
@@ -232,6 +238,7 @@
             this.AnH3.TabIndex = 14;
             this.AnH3.Text = "An H3";
             this.AnH3.UseVisualStyleBackColor = true;
+            this.AnH3.Click += new System.EventHandler(this.AnH3_Click);
             // 
             // SyV4
             // 
@@ -250,6 +257,7 @@
             this.AnV4.TabIndex = 20;
             this.AnV4.Text = "An V4";
             this.AnV4.UseVisualStyleBackColor = true;
+            this.AnV4.Click += new System.EventHandler(this.AnV4_Click);
             // 
             // SyH4
             // 
@@ -268,6 +276,7 @@
             this.AnH4.TabIndex = 18;
             this.AnH4.Text = "An H4";
             this.AnH4.UseVisualStyleBackColor = true;
+            this.AnH4.Click += new System.EventHandler(this.AnH4_Click);
             // 
             // SyV5
             // 
@@ -286,6 +295,7 @@
             this.AnV5.TabIndex = 24;
             this.AnV5.Text = "An V5";
             this.AnV5.UseVisualStyleBackColor = true;
+            this.AnV5.Click += new System.EventHandler(this.AnV5_Click);
             // 
             // SyH5
             // 
@@ -304,6 +314,7 @@
             this.AnH5.TabIndex = 22;
             this.AnH5.Text = "An H5";
             this.AnH5.UseVisualStyleBackColor = true;
+            this.AnH5.Click += new System.EventHandler(this.AnH5_Click);
             // 
             // LevelNumericUpDown
             // 
@@ -365,24 +376,6 @@
             this.OffsetLabel.TabIndex = 30;
             this.OffsetLabel.Text = "Offset";
             // 
-            // XLabel
-            // 
-            this.XLabel.AutoSize = true;
-            this.XLabel.Location = new System.Drawing.Point(710, 611);
-            this.XLabel.Name = "XLabel";
-            this.XLabel.Size = new System.Drawing.Size(14, 13);
-            this.XLabel.TabIndex = 31;
-            this.XLabel.Text = "X";
-            // 
-            // YLabel
-            // 
-            this.YLabel.AutoSize = true;
-            this.YLabel.Location = new System.Drawing.Point(710, 644);
-            this.YLabel.Name = "YLabel";
-            this.YLabel.Size = new System.Drawing.Size(14, 13);
-            this.YLabel.TabIndex = 32;
-            this.YLabel.Text = "Y";
-            // 
             // LevelLabel
             // 
             this.LevelLabel.AutoSize = true;
@@ -406,32 +399,50 @@
             this.OffsetTextBox.Size = new System.Drawing.Size(100, 20);
             this.OffsetTextBox.TabIndex = 35;
             // 
-            // XTextBox
-            // 
-            this.XTextBox.Location = new System.Drawing.Point(765, 604);
-            this.XTextBox.Name = "XTextBox";
-            this.XTextBox.Size = new System.Drawing.Size(100, 20);
-            this.XTextBox.TabIndex = 36;
-            // 
             // YTextBox
             // 
-            this.YTextBox.Location = new System.Drawing.Point(765, 641);
+            this.YTextBox.Location = new System.Drawing.Point(938, 561);
             this.YTextBox.Name = "YTextBox";
             this.YTextBox.Size = new System.Drawing.Size(100, 20);
-            this.YTextBox.TabIndex = 37;
+            this.YTextBox.TabIndex = 41;
+            // 
+            // XTextBox
+            // 
+            this.XTextBox.Location = new System.Drawing.Point(938, 521);
+            this.XTextBox.Name = "XTextBox";
+            this.XTextBox.Size = new System.Drawing.Size(100, 20);
+            this.XTextBox.TabIndex = 40;
+            // 
+            // YLabel
+            // 
+            this.YLabel.AutoSize = true;
+            this.YLabel.Location = new System.Drawing.Point(918, 564);
+            this.YLabel.Name = "YLabel";
+            this.YLabel.Size = new System.Drawing.Size(14, 13);
+            this.YLabel.TabIndex = 39;
+            this.YLabel.Text = "Y";
+            // 
+            // XLabel
+            // 
+            this.XLabel.AutoSize = true;
+            this.XLabel.Location = new System.Drawing.Point(918, 523);
+            this.XLabel.Name = "XLabel";
+            this.XLabel.Size = new System.Drawing.Size(14, 13);
+            this.XLabel.TabIndex = 38;
+            this.XLabel.Text = "X";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1330, 666);
+            this.ClientSize = new System.Drawing.Size(1330, 588);
             this.Controls.Add(this.YTextBox);
             this.Controls.Add(this.XTextBox);
+            this.Controls.Add(this.YLabel);
+            this.Controls.Add(this.XLabel);
             this.Controls.Add(this.OffsetTextBox);
             this.Controls.Add(this.ScaleTextBox);
             this.Controls.Add(this.LevelLabel);
-            this.Controls.Add(this.YLabel);
-            this.Controls.Add(this.XLabel);
             this.Controls.Add(this.OffsetLabel);
             this.Controls.Add(this.ScaleLabel);
             this.Controls.Add(this.SynthesisButton);
@@ -506,13 +517,13 @@
         private System.Windows.Forms.Button SynthesisButton;
         private System.Windows.Forms.Label ScaleLabel;
         private System.Windows.Forms.Label OffsetLabel;
-        private System.Windows.Forms.Label XLabel;
-        private System.Windows.Forms.Label YLabel;
         private System.Windows.Forms.Label LevelLabel;
         private System.Windows.Forms.TextBox ScaleTextBox;
         private System.Windows.Forms.TextBox OffsetTextBox;
-        private System.Windows.Forms.TextBox XTextBox;
         private System.Windows.Forms.TextBox YTextBox;
+        private System.Windows.Forms.TextBox XTextBox;
+        private System.Windows.Forms.Label YLabel;
+        private System.Windows.Forms.Label XLabel;
     }
 }
 
