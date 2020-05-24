@@ -25,7 +25,10 @@ namespace wavelet
 
         double[] LowAnalysis = { 0.026748757411, -0.016864118443, -0.078223266529, 0.266864118443, 0.602949018236, 0.266864118443, -0.078223266529, -0.016864118443, 0.026748757411 };
         double[] HighAnalysis = { 0.000000000000, 0.091271763114, -0.057543526229, -0.591271763114, 1.115087052457, -0.591271763114, -0.057543526229, 0.091271763114, 0.000000000000 };
-        double[] LowSynthesis = { };
+        double[] LowSynthesis = { 0.000000000000, -0.091271763114, -0.057543526229, 0.591271763114, 1.115087052457, 0.591271763114, -0.057543526229, -0.091271763114, 0.000000000000 };
+        double[] HighSynthesis = { 0.026748757411, 0.016864118443, -0.078223266529, -0.266864118443, 0.602949018236, -0.266864118443, -0.078223266529, 0.016864118443, 0.026748757411 };
+
+        byte[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 3, 2, 7, 5, 2, 8, 2, 55, 2, 7, 3, 1, 6, 9, 1, 3, 2, 66 };
         public Form1()
         {
             InitializeComponent();
@@ -121,7 +124,7 @@ namespace wavelet
                     if (pixelIndex > length - 1)
                     {
                         int difference = pixelIndex - (length - 1);
-                        pixelIndex = length - difference;
+                        pixelIndex = length - 1 - difference;
                     }
 
                     double pixelValue = DecodedImageMatrix[line, pixelIndex];
@@ -173,7 +176,7 @@ namespace wavelet
                     if (pixelIndex > length - 1)
                     {
                         int difference = pixelIndex - (length - 1);
-                        pixelIndex = length - difference;
+                        pixelIndex = length - 1 - difference;
                     }
 
                     double pixelValue = DecodedImageMatrix[pixelIndex, column];
@@ -189,27 +192,95 @@ namespace wavelet
         {
             /* int length = GetLength(level); */
             int length = GetLength(level);
-            for (int line = 0; line < IMAGE_HEIGHT; line++)
+            for (int column = 0; column < IMAGE_HEIGHT; column++)
             {
-                double[] low = SynthesizeColumn(line, length, LowAnalysis);
-                double[] high = SynthesizeColumn(line, length, HighAnalysis);
+                double[] lowVector = new double[length];
                 for (int i = 0; i < length / 2; i++)
                 {
-                    DecodedImageMatrix[line, i] = low[2 * i];
+                    lowVector[2 * i] = DecodedImageMatrix[i, column];
+                    lowVector[2 * i + 1] = 0;
                 }
-                int j = length / 2;
-                for (int i = 0; i < length / 2; i++)
+
+                double[] highVector = new double[length];
+                int start = 0;
+                for (int i = length / 2; i < length; i++)
                 {
-                    DecodedImageMatrix[line, j] = high[2 * i + 1];
-                    j++;
+                    highVector[start] = 0;
+                    highVector[start + 1] = DecodedImageMatrix[i, column];
+                    start += 2;
+                }
+
+                double[] low = SynthesizeColumn(lowVector, length, LowSynthesis);
+                double[] high = SynthesizeColumn(highVector, length, HighSynthesis);
+                for (int i = 0; i < length; i++)
+                {
+                    DecodedImageMatrix[i, column] = low[i] + high[i];
                 }
             }
 
         }
 
-        double[] SynthesizeColumn(int column, int length, double[] mask)
+        double[] SynthesizeColumn(double[] vector, int length, double[] mask)
         {
-            return null;
+            double[] buffer = new double[length];
+            for (int i = 0; i < length; i++)
+            {
+                int pixelOffset = -4;
+                double result = 0;
+                for (int j = 0; j < NUMBER_OF_FILTER_ELEMENTS; j++)
+                {
+                    double filterValue = mask[j];
+                    int pixelIndex = i;
+                    pixelIndex += pixelOffset;
+                    if (i < 4)
+                    {
+                        pixelIndex = Math.Abs(pixelIndex);
+                    }
+
+                    if (pixelIndex > length - 1)
+                    {
+                        int difference = pixelIndex - (length - 1);
+                        pixelIndex = length - 1 - difference;
+                    }
+
+                    double pixelValue = vector[pixelIndex];
+                    result += filterValue * pixelValue;
+                    pixelOffset++;
+                }
+                buffer[i] = result;
+            }
+            return buffer;
+        }
+
+        void HorizontalSynthesis(int level)
+        {
+            int length = GetLength(level);
+            for (int line = 0; line < IMAGE_HEIGHT; line++)
+            {
+                double[] lowVector = new double[length];
+                for (int i = 0; i < length / 2; i++)
+                {
+                    lowVector[2 * i] = DecodedImageMatrix[line, i];
+                    lowVector[2 * i + 1] = 0;
+                }
+
+                double[] highVector = new double[length];
+                int start = 0;
+                for (int i = length / 2; i < length; i++)
+                {
+                    highVector[start] = 0;
+                    highVector[start + 1] = DecodedImageMatrix[line, i];
+                    start += 2;
+                }
+
+                double[] low = SynthesizeColumn(lowVector, length, LowSynthesis);
+                double[] high = SynthesizeColumn(highVector, length, HighSynthesis);
+                for (int i = 0; i < length; i++)
+                {
+                    DecodedImageMatrix[line, i] = low[i] + high[i];
+                }
+            }
+
         }
         private void DrawImage()
         {
@@ -296,7 +367,62 @@ namespace wavelet
 
         private void SyV5_Click(object sender, EventArgs e)
         {
+            VerticalSynthesis(5);
+            DrawImage();
+        }
 
+        private void SyH5_Click(object sender, EventArgs e)
+        {
+            HorizontalSynthesis(5);
+            DrawImage();
+        }
+
+        private void SyV4_Click(object sender, EventArgs e)
+        {
+            VerticalSynthesis(4);
+            DrawImage();
+        }
+
+        private void SyH4_Click(object sender, EventArgs e)
+        {
+            HorizontalSynthesis(4);
+            DrawImage();
+        }
+
+        private void SyV3_Click(object sender, EventArgs e)
+        {
+            VerticalSynthesis(3);
+            DrawImage();
+        }
+
+        private void SyH3_Click(object sender, EventArgs e)
+        {
+            HorizontalSynthesis(3);
+            DrawImage();
+        }
+
+        private void SyV2_Click(object sender, EventArgs e)
+        {
+            VerticalSynthesis(2);
+            DrawImage();
+        }
+
+        private void SyH2_Click(object sender, EventArgs e)
+        {
+            HorizontalSynthesis(2);
+            DrawImage();
+        }
+
+        private void SyV1_Click(object sender, EventArgs e)
+        {
+            VerticalSynthesis(1);
+            DrawImage();
+        }
+
+        private void SyH1_Click(object sender, EventArgs e)
+        {
+            HorizontalSynthesis(1);
+            DrawImage();
         }
     }
 }

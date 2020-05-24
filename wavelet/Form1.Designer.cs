@@ -144,6 +144,7 @@
             this.SyH1.TabIndex = 7;
             this.SyH1.Text = "Sy H1";
             this.SyH1.UseVisualStyleBackColor = true;
+            this.SyH1.Click += new System.EventHandler(this.SyH1_Click);
             // 
             // AnV1
             // 
@@ -163,6 +164,7 @@
             this.SyV1.TabIndex = 9;
             this.SyV1.Text = "Sy V1";
             this.SyV1.UseVisualStyleBackColor = true;
+            this.SyV1.Click += new System.EventHandler(this.SyV1_Click);
             // 
             // SyV2
             // 
@@ -172,6 +174,7 @@
             this.SyV2.TabIndex = 13;
             this.SyV2.Text = "Sy V2";
             this.SyV2.UseVisualStyleBackColor = true;
+            this.SyV2.Click += new System.EventHandler(this.SyV2_Click);
             // 
             // AnV2
             // 
@@ -191,6 +194,7 @@
             this.SyH2.TabIndex = 11;
             this.SyH2.Text = "Sy H2";
             this.SyH2.UseVisualStyleBackColor = true;
+            this.SyH2.Click += new System.EventHandler(this.SyH2_Click);
             // 
             // AnH2
             // 
@@ -210,6 +214,7 @@
             this.SyV3.TabIndex = 17;
             this.SyV3.Text = "Sy V3";
             this.SyV3.UseVisualStyleBackColor = true;
+            this.SyV3.Click += new System.EventHandler(this.SyV3_Click);
             // 
             // AnV3
             // 
@@ -229,6 +234,7 @@
             this.SyH3.TabIndex = 15;
             this.SyH3.Text = "Sy H3";
             this.SyH3.UseVisualStyleBackColor = true;
+            this.SyH3.Click += new System.EventHandler(this.SyH3_Click);
             // 
             // AnH3
             // 
@@ -248,6 +254,7 @@
             this.SyV4.TabIndex = 21;
             this.SyV4.Text = "Sy V4";
             this.SyV4.UseVisualStyleBackColor = true;
+            this.SyV4.Click += new System.EventHandler(this.SyV4_Click);
             // 
             // AnV4
             // 
@@ -267,6 +274,7 @@
             this.SyH4.TabIndex = 19;
             this.SyH4.Text = "Sy H4";
             this.SyH4.UseVisualStyleBackColor = true;
+            this.SyH4.Click += new System.EventHandler(this.SyH4_Click);
             // 
             // AnH4
             // 
@@ -306,6 +314,7 @@
             this.SyH5.TabIndex = 23;
             this.SyH5.Text = "Sy H5";
             this.SyH5.UseVisualStyleBackColor = true;
+            this.SyH5.Click += new System.EventHandler(this.SyH5_Click);
             // 
             // AnH5
             // 
