@@ -71,6 +71,7 @@
             this.MaximumErrorLabel = new System.Windows.Forms.Label();
             this.MinimumErrorTextBox = new System.Windows.Forms.TextBox();
             this.MaximumErrorTextBox = new System.Windows.Forms.TextBox();
+            this.ResetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecodedImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LevelNumericUpDown)).BeginInit();
@@ -112,6 +113,7 @@
             this.DecoderLoadButton.TabIndex = 3;
             this.DecoderLoadButton.Text = "Load";
             this.DecoderLoadButton.UseVisualStyleBackColor = true;
+            this.DecoderLoadButton.Click += new System.EventHandler(this.DecoderLoadButton_Click);
             // 
             // TestErrorButton
             // 
@@ -131,6 +133,7 @@
             this.SaveButton.TabIndex = 5;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // AnH1
             // 
@@ -503,11 +506,22 @@
             this.MaximumErrorTextBox.TabIndex = 46;
             this.MaximumErrorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // ResetButton
+            // 
+            this.ResetButton.Location = new System.Drawing.Point(1044, 558);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(87, 23);
+            this.ResetButton.TabIndex = 47;
+            this.ResetButton.Text = "Reset";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1330, 588);
+            this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.MaximumErrorTextBox);
             this.Controls.Add(this.MinimumErrorTextBox);
             this.Controls.Add(this.MaximumErrorLabel);
@@ -606,6 +620,7 @@
         private System.Windows.Forms.Label MaximumErrorLabel;
         private System.Windows.Forms.TextBox MinimumErrorTextBox;
         private System.Windows.Forms.TextBox MaximumErrorTextBox;
+        private System.Windows.Forms.Button ResetButton;
     }
 }
 

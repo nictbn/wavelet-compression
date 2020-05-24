@@ -558,5 +558,61 @@ namespace wavelet
             MaximumErrorTextBox.Text = maxDifference.ToString();
             MinimumErrorTextBox.Text = minDifference.ToString();
         }
+
+        private void DecoderLoadButton_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\School";
+                openFileDialog.Filter = "Wavelet FIles (*.wvl)|*.WVL";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (BinaryReader br = new BinaryReader(File.Open(openFileDialog.FileName, FileMode.Open)))
+                    {
+                        for (int i = 0; i < IMAGE_HEIGHT; i++)
+                        {
+                            for (int j = 0; j < IMAGE_WIDTH; j++)
+                            {
+                                DecodedImageMatrix[i, j] = br.ReadDouble();
+                            }
+                        }
+                    }
+                    DrawImage();
+                }
+            }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (OriginalImagePath == null)
+            {
+                return;
+            }
+            string wvlFilePath = OriginalImagePath + ".wvl";
+            using (BinaryWriter bw = new BinaryWriter(File.Open(wvlFilePath, FileMode.Create)))
+            {
+                for (int i = 0; i < IMAGE_HEIGHT; i++)
+                {
+                    for (int j = 0; j < IMAGE_WIDTH; j++)
+                    {
+                        bw.Write(DecodedImageMatrix[i, j]);
+                    }
+                }
+            }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < IMAGE_HEIGHT; i++)
+            {
+                for (int j = 0; j < IMAGE_WIDTH; j++)
+                {
+                    DecodedImageMatrix[i, j] = OriginalImageMatrix[i, j];
+                }
+            }
+            DrawImage();
+        }
     }
 }
