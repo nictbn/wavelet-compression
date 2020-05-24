@@ -533,5 +533,30 @@ namespace wavelet
             }
             DecodedImagePictureBox.Image = image;
         }
+
+        private void TestErrorButton_Click(object sender, EventArgs e)
+        {
+            int maxDifference = int.MinValue;
+            int minDifference = int.MaxValue;
+            for (int i = 0; i < IMAGE_HEIGHT; i++)
+            {
+                for (int j = 0; j < IMAGE_WIDTH; j++)
+                {
+                    int original = OriginalImageMatrix[i, j];
+                    int decoded = (int)Math.Round(DecodedImageMatrix[i, j], 0);
+                    int difference = original - decoded;
+                    if (maxDifference < difference)
+                    {
+                        maxDifference = difference;
+                    }
+                    if (minDifference > difference)
+                    {
+                        minDifference = difference;
+                    }
+                }
+            }
+            MaximumErrorTextBox.Text = maxDifference.ToString();
+            MinimumErrorTextBox.Text = minDifference.ToString();
+        }
     }
 }

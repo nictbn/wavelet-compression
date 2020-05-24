@@ -67,6 +67,10 @@
             this.YLabel = new System.Windows.Forms.Label();
             this.XLabel = new System.Windows.Forms.Label();
             this.VizualizeWavelet = new System.Windows.Forms.Button();
+            this.MinimumErrorLabel = new System.Windows.Forms.Label();
+            this.MaximumErrorLabel = new System.Windows.Forms.Label();
+            this.MinimumErrorTextBox = new System.Windows.Forms.TextBox();
+            this.MaximumErrorTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DecodedImagePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LevelNumericUpDown)).BeginInit();
@@ -117,6 +121,7 @@
             this.TestErrorButton.TabIndex = 4;
             this.TestErrorButton.Text = "Test Error";
             this.TestErrorButton.UseVisualStyleBackColor = true;
+            this.TestErrorButton.Click += new System.EventHandler(this.TestErrorButton_Click);
             // 
             // SaveButton
             // 
@@ -462,11 +467,51 @@
             this.VizualizeWavelet.UseVisualStyleBackColor = true;
             this.VizualizeWavelet.Click += new System.EventHandler(this.VizualizeWavelet_Click);
             // 
+            // MinimumErrorLabel
+            // 
+            this.MinimumErrorLabel.AutoSize = true;
+            this.MinimumErrorLabel.Location = new System.Drawing.Point(93, 564);
+            this.MinimumErrorLabel.Name = "MinimumErrorLabel";
+            this.MinimumErrorLabel.Size = new System.Drawing.Size(76, 13);
+            this.MinimumErrorLabel.TabIndex = 43;
+            this.MinimumErrorLabel.Text = "Minimum Error:";
+            // 
+            // MaximumErrorLabel
+            // 
+            this.MaximumErrorLabel.AutoSize = true;
+            this.MaximumErrorLabel.Location = new System.Drawing.Point(307, 564);
+            this.MaximumErrorLabel.Name = "MaximumErrorLabel";
+            this.MaximumErrorLabel.Size = new System.Drawing.Size(79, 13);
+            this.MaximumErrorLabel.TabIndex = 44;
+            this.MaximumErrorLabel.Text = "Maximum Error:";
+            // 
+            // MinimumErrorTextBox
+            // 
+            this.MinimumErrorTextBox.Location = new System.Drawing.Point(175, 561);
+            this.MinimumErrorTextBox.Name = "MinimumErrorTextBox";
+            this.MinimumErrorTextBox.ReadOnly = true;
+            this.MinimumErrorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.MinimumErrorTextBox.TabIndex = 45;
+            this.MinimumErrorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // MaximumErrorTextBox
+            // 
+            this.MaximumErrorTextBox.Location = new System.Drawing.Point(392, 561);
+            this.MaximumErrorTextBox.Name = "MaximumErrorTextBox";
+            this.MaximumErrorTextBox.ReadOnly = true;
+            this.MaximumErrorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.MaximumErrorTextBox.TabIndex = 46;
+            this.MaximumErrorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1330, 588);
+            this.Controls.Add(this.MaximumErrorTextBox);
+            this.Controls.Add(this.MinimumErrorTextBox);
+            this.Controls.Add(this.MaximumErrorLabel);
+            this.Controls.Add(this.MinimumErrorLabel);
             this.Controls.Add(this.VizualizeWavelet);
             this.Controls.Add(this.YTextBox);
             this.Controls.Add(this.XTextBox);
@@ -557,6 +602,10 @@
         private System.Windows.Forms.Label YLabel;
         private System.Windows.Forms.Label XLabel;
         private System.Windows.Forms.Button VizualizeWavelet;
+        private System.Windows.Forms.Label MinimumErrorLabel;
+        private System.Windows.Forms.Label MaximumErrorLabel;
+        private System.Windows.Forms.TextBox MinimumErrorTextBox;
+        private System.Windows.Forms.TextBox MaximumErrorTextBox;
     }
 }
 
