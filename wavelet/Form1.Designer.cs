@@ -286,6 +286,7 @@
             this.SyV5.TabIndex = 25;
             this.SyV5.Text = "Sy V5";
             this.SyV5.UseVisualStyleBackColor = true;
+            this.SyV5.Click += new System.EventHandler(this.SyV5_Click);
             // 
             // AnV5
             // 

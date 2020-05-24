@@ -17,6 +17,7 @@ namespace wavelet
         const int IMAGE_WIDTH = 512;
         const int IMAGE_HEIGHT = 512;
         const int HEADER_SIZE = 1078;
+        const int NUMBER_OF_FILTER_ELEMENTS = 9;
 
         string OriginalImagePath;
         byte[,] OriginalImageMatrix;
@@ -24,6 +25,7 @@ namespace wavelet
 
         double[] LowAnalysis = { 0.026748757411, -0.016864118443, -0.078223266529, 0.266864118443, 0.602949018236, 0.266864118443, -0.078223266529, -0.016864118443, 0.026748757411 };
         double[] HighAnalysis = { 0.000000000000, 0.091271763114, -0.057543526229, -0.591271763114, 1.115087052457, -0.591271763114, -0.057543526229, 0.091271763114, 0.000000000000 };
+        double[] LowSynthesis = { };
         public Form1()
         {
             InitializeComponent();
@@ -72,14 +74,20 @@ namespace wavelet
                 }
             }
         }
-
+        int GetLength(int level)
+        {
+            level--;
+            int divisionFactor = (int)Math.Pow(2, level);
+            int length = IMAGE_HEIGHT / divisionFactor;
+            return length;
+        }
         void HorizontalAnalysis(int level)
         {
             int length = GetLength(level);
             for (int line = 0; line < IMAGE_HEIGHT; line++)
             {
-                double[] low = ProcessLine(line, length, LowAnalysis);
-                double[] high = ProcessLine(line, length, HighAnalysis);
+                double[] low = AnalyzeLine(line, length, LowAnalysis);
+                double[] high = AnalyzeLine(line, length, HighAnalysis);
                 for (int i = 0; i < length / 2; i++)
                 {
                     DecodedImageMatrix[line, i] = low[2 * i];
@@ -93,22 +101,14 @@ namespace wavelet
             }
         }
 
-        int GetLength(int level)
-        {
-            level--;
-            int divisionFactor = (int)Math.Pow(2, level);
-            int length = IMAGE_HEIGHT / divisionFactor;
-            return length;
-        }
-
-        private double[] ProcessLine(int line, int length, double[] mask)
+        private double[] AnalyzeLine(int line, int length, double[] mask)
         {
             double[] buffer = new double[length];
             for (int i = 0; i < length; i++)
             {
                 int pixelOffset = -4;
                 double result = 0;
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < NUMBER_OF_FILTER_ELEMENTS; j++)
                 {
                     double filterValue = mask[j];
                     int pixelIndex = i;
@@ -138,8 +138,8 @@ namespace wavelet
             int length = GetLength(level);
             for (int column = 0; column < IMAGE_HEIGHT; column++)
             {
-                double[] low = ProcessColumn(column, length, LowAnalysis);
-                double[] high = ProcessColumn(column, length, HighAnalysis);
+                double[] low = AnalyzeColumn(column, length, LowAnalysis);
+                double[] high = AnalyzeColumn(column, length, HighAnalysis);
                 for (int i = 0; i < length / 2; i++)
                 {
                     DecodedImageMatrix[i, column] = low[2 * i];
@@ -153,14 +153,14 @@ namespace wavelet
             }
         }
 
-        private double[] ProcessColumn (int column, int length, double[] mask)
+        private double[] AnalyzeColumn (int column, int length, double[] mask)
         {
             double[] buffer = new double[length];
             for (int i = 0; i < length; i++)
             {
                 int pixelOffset = -4;
                 double result = 0;
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < NUMBER_OF_FILTER_ELEMENTS; j++)
                 {
                     double filterValue = mask[j];
                     int pixelIndex = i;
@@ -185,6 +185,32 @@ namespace wavelet
             return buffer;
         }
 
+        void VerticalSynthesis(int level)
+        {
+            /* int length = GetLength(level); */
+            int length = GetLength(level);
+            for (int line = 0; line < IMAGE_HEIGHT; line++)
+            {
+                double[] low = SynthesizeColumn(line, length, LowAnalysis);
+                double[] high = SynthesizeColumn(line, length, HighAnalysis);
+                for (int i = 0; i < length / 2; i++)
+                {
+                    DecodedImageMatrix[line, i] = low[2 * i];
+                }
+                int j = length / 2;
+                for (int i = 0; i < length / 2; i++)
+                {
+                    DecodedImageMatrix[line, j] = high[2 * i + 1];
+                    j++;
+                }
+            }
+
+        }
+
+        double[] SynthesizeColumn(int column, int length, double[] mask)
+        {
+            return null;
+        }
         private void DrawImage()
         {
             Bitmap image = new Bitmap(IMAGE_HEIGHT, IMAGE_WIDTH);
@@ -266,6 +292,11 @@ namespace wavelet
         {
             VerticalAnalysis(5);
             DrawImage();
+        }
+
+        private void SyV5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
