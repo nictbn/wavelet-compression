@@ -87,7 +87,7 @@ namespace wavelet
         void HorizontalAnalysis(int level)
         {
             int length = GetLength(level);
-            for (int line = 0; line < IMAGE_HEIGHT; line++)
+            for (int line = 0; line < length; line++)
             {
                 double[] low = AnalyzeLine(line, length, LowAnalysis);
                 double[] high = AnalyzeLine(line, length, HighAnalysis);
@@ -139,7 +139,7 @@ namespace wavelet
         void VerticalAnalysis(int level)
         {
             int length = GetLength(level);
-            for (int column = 0; column < IMAGE_HEIGHT; column++)
+            for (int column = 0; column < length; column++)
             {
                 double[] low = AnalyzeColumn(column, length, LowAnalysis);
                 double[] high = AnalyzeColumn(column, length, HighAnalysis);
@@ -192,7 +192,7 @@ namespace wavelet
         {
             /* int length = GetLength(level); */
             int length = GetLength(level);
-            for (int column = 0; column < IMAGE_HEIGHT; column++)
+            for (int column = 0; column < length; column++)
             {
                 double[] lowVector = new double[length];
                 for (int i = 0; i < length / 2; i++)
@@ -255,7 +255,7 @@ namespace wavelet
         void HorizontalSynthesis(int level)
         {
             int length = GetLength(level);
-            for (int line = 0; line < IMAGE_HEIGHT; line++)
+            for (int line = 0; line < length; line++)
             {
                 double[] lowVector = new double[length];
                 for (int i = 0; i < length / 2; i++)
