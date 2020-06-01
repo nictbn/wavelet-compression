@@ -27,8 +27,6 @@ namespace wavelet
         double[] HighAnalysis = { 0.000000000000, 0.091271763114, -0.057543526229, -0.591271763114, 1.115087052457, -0.591271763114, -0.057543526229, 0.091271763114, 0.000000000000 };
         double[] LowSynthesis = { 0.000000000000, -0.091271763114, -0.057543526229, 0.591271763114, 1.115087052457, 0.591271763114, -0.057543526229, -0.091271763114, 0.000000000000 };
         double[] HighSynthesis = { 0.026748757411, 0.016864118443, -0.078223266529, -0.266864118443, 0.602949018236, -0.266864118443, -0.078223266529, 0.016864118443, 0.026748757411 };
-
-        byte[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 3, 2, 7, 5, 2, 8, 2, 55, 2, 7, 3, 1, 6, 9, 1, 3, 2, 66 };
         public Form1()
         {
             InitializeComponent();
@@ -190,7 +188,6 @@ namespace wavelet
 
         void VerticalSynthesis(int level)
         {
-            /* int length = GetLength(level); */
             int length = GetLength(level);
             for (int column = 0; column < length; column++)
             {
@@ -210,8 +207,8 @@ namespace wavelet
                     start += 2;
                 }
 
-                double[] low = SynthesizeColumn(lowVector, length, LowSynthesis);
-                double[] high = SynthesizeColumn(highVector, length, HighSynthesis);
+                double[] low = Synthesize(lowVector, length, LowSynthesis);
+                double[] high = Synthesize(highVector, length, HighSynthesis);
                 for (int i = 0; i < length; i++)
                 {
                     DecodedImageMatrix[i, column] = low[i] + high[i];
@@ -220,7 +217,7 @@ namespace wavelet
 
         }
 
-        double[] SynthesizeColumn(double[] vector, int length, double[] mask)
+        double[] Synthesize(double[] vector, int length, double[] mask)
         {
             double[] buffer = new double[length];
             for (int i = 0; i < length; i++)
@@ -273,8 +270,8 @@ namespace wavelet
                     start += 2;
                 }
 
-                double[] low = SynthesizeColumn(lowVector, length, LowSynthesis);
-                double[] high = SynthesizeColumn(highVector, length, HighSynthesis);
+                double[] low = Synthesize(lowVector, length, LowSynthesis);
+                double[] high = Synthesize(highVector, length, HighSynthesis);
                 for (int i = 0; i < length; i++)
                 {
                     DecodedImageMatrix[line, i] = low[i] + high[i];
