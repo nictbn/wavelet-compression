@@ -51,6 +51,7 @@ namespace wavelet
                     {
                         OriginalImagePictureBox.Image = new Bitmap(bmpTemp);
                     }
+                    DrawImage();
                 }
             }
         }
